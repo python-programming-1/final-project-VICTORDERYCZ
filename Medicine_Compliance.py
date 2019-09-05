@@ -49,21 +49,7 @@ def log_data(med_taken, index, reminder_num):
     reminder_num += 1
     return index, reminder_num
 
-# main --------------------------
-
-hours = get_inputs()
-sec = get_seconds(hours)
-#print(sec)
-med_taken_list = ['yes', 'no']
-reminder_num = 1
-index = 1
-run = True
-while run == True:
-    time.sleep(sec)
-    account_sid = 'AC6ade5f993b29faf330a9e9ac61c74ab6'
-    auth_token = 'e8fa75993e3cb6583e174658ee036903'
-
-    def sendMessage(account_sid, auth_token):
+def sendMessage(account_sid, auth_token):
         client = Client(account_sid, auth_token)
 
         client.messages \
@@ -74,11 +60,23 @@ while run == True:
                             to='+13105925301'
                         )
 
+# main --------------------------
+
+hours = get_inputs()
+sec = get_seconds(hours)
+#print(sec)
+med_taken_list = ['yes', 'no']
+reminder_num = 1
+index = 1
+run = True
+while run == True:
+    time.sleep(10)
+    account_sid = 'AC6ade5f993b29faf330a9e9ac61c74ab'
+    auth_token = 'e8fa75993e3cb6583e174658ee036903'
+
     sendMessage(account_sid, auth_token)
 
     med_taken = str(input('Have you taken your medicine or not ("yes", "no"): '))
     while med_taken not in med_taken_list:
         med_taken = str(input('Must be "yes" or "no": )'))
     index, reminder_num = log_data(med_taken, index, reminder_num)
-
-
